@@ -1,6 +1,6 @@
 package com.Zezai;
 
-import com.Zezai.Service.Impl.bookServiceImpl;
+import com.Zezai.service.Impl.bookServiceImpl;
 import com.Zezai.config.SpringConfig;
 import com.Zezai.domain.Brand;
 import org.springframework.context.ApplicationContext;

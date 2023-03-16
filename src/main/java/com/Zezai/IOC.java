@@ -1,12 +1,13 @@
 package com.Zezai;
 
+import com.Zezai.config.SpringConfig;
 import com.Zezai.dao.Dao;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class IOC {
     public static void main(String[] args) {
         //获取容器
-        ClassPathXmlApplicationContext ctx=new ClassPathXmlApplicationContext("applicationContext.xml.bak");
+        AnnotationConfigApplicationContext ctx=new AnnotationConfigApplicationContext(SpringConfig.class);
         //Dao dao=(Dao)ctx.getBean("DaoImpl");
         //获取Bean
         Dao dao=(Dao) ctx.getBean("bookDaoImpl");

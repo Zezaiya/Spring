@@ -16,4 +16,6 @@ public interface Dao {
     int daoAction3();
 
     void daoAction4();
+
+    boolean CodeCheck(String username,String password);
 }

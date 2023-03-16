@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository("bookDaoImpl")
+@Repository("DaoImpl")
 public class bookDaoImpl implements Dao {
 
     public List<Brand> selectAll() {
@@ -29,6 +29,13 @@ public class bookDaoImpl implements Dao {
         return 666;
     }public void daoAction4() {
         System.out.println("dao Action4");
+    }
+
+    @Override
+    public boolean CodeCheck(String username, String password) {
+        String CurUsername="123456";
+        String CurPassword="zezaiya6";
+        return username.equals(CurUsername) && password.equals(CurPassword);
     }
 
 

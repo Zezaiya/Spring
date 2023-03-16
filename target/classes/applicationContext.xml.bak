@@ -1,0 +1,33 @@
+                                    以下为不使用纯注解开发的使用方式
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    <!--添加druid数据源数据进行管理-->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <!--因为druid没有提供构造器,所以只能用setter注入(我们需要填上连接数据库的基本信息)-->
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/db1"/>
+        <property name="username" value="root"/>
+        <property name="password" value="123456"/>
+    </bean>
+    <!--添加其他数据源的格式大同小异,参数不同,可以在网上查找资料-->
+
+
+      <!--配置bean--> <!--通过标签的方式配置-->
+      <!--id:为bean取名字,方便后面取出   class:要放入IoC容器的实现类(对象)-->
+    <!--<bean id="ServiceImpl" class="com.Zezai.service.impl.bookServiceImpl" autowire="byType">-->
+     <!--配置dao与service的关系-->
+        <!-- name表示实现类里的属性(Dao) ref表示真实要传入的bean的id[DaoImpl->com.Zezai.dao.impl.bookDaoImpl]-->
+        <!--<property name="number" value="10"/>-->
+
+
+      <!--通过注解的方式配置-->
+    <context:component-scan base-package="com.Zezai"/>
+        </beans>
+

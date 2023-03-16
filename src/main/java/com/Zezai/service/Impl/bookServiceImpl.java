@@ -1,8 +1,8 @@
-package com.Zezai.Service.Impl;
+package com.Zezai.service.Impl;
 
-import com.Zezai.Service.Service;
 import com.Zezai.dao.Dao;
 import com.Zezai.domain.Brand;
+import com.Zezai.service.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.ComponentScan;
@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Scope;
 
 import java.util.List;
 
-@org.springframework.stereotype.Service("bookServiceImpl")//设置这个类为bean类，取名为bookServiceImpl
+@org.springframework.stereotype.Service("ServiceImpl")//设置这个类为bean类，取名为bookServiceImpl
 @ComponentScan("com.Zezai")//光设置类不行，必须让容器能找到该bean，所以要添加扫描仪
 @Scope("prototype")
 public class bookServiceImpl implements Service {
@@ -22,6 +22,11 @@ public class bookServiceImpl implements Service {
     public String name;
     public void serviceAction() {
         dao.daoAction();
+    }
+
+    @Override
+    public boolean CodeCheckService(String username, String password) {
+        return dao.CodeCheck(username,password);
     }
 
 
