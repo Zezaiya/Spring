@@ -8,6 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Scope;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 @org.springframework.stereotype.Service("ServiceImpl")//设置这个类为bean类，取名为bookServiceImpl
@@ -50,12 +51,21 @@ public class bookServiceImpl implements Service {
 
     @Override
     public void ServiceTransfer(String username,String OPusername,int lost) {
-        dao.inMoney(OPusername,lost);
-        //如果在转账操作中间出现异常,会导致账户金额出现异常,所以这个时候需要用到事务处理
-       int i= 2/0;
-        dao.outMoney(username,lost);
+        Date time=new Date();
+        String info= "转账操作:"+username+"->"+OPusername;
+        try {
+            dao.inMoney(OPusername,lost);
+            //如果在转账操作中间出现异常,会导致账户金额出现异常,所以这个时候需要用到事务处理
+            dao.outMoney(username,lost);
+        }finally {
+            dao.addLog(info,lost,time);
+        }
+
         System.out.println("转账成功!");
+
     }
+
+
     /*@PostConstruct
     public void afterPropertiesSet() {
         System.out.println("init.....");
