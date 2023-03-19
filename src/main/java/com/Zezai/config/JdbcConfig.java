@@ -4,9 +4,10 @@ import com.Zezai.dao.impl.bookDaoImpl;
 import com.alibaba.druid.pool.DruidDataSource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
-
 public class JdbcConfig {
     //1.定义一个方法获得要管理的对象
     //2.添加@Bean标签,表示当前方法返回的是Bean类型
@@ -26,5 +27,12 @@ public class JdbcConfig {
         ds.setUsername(username);
         ds.setPassword(password);
         return ds;
+    }
+
+    @Bean
+    public PlatformTransactionManager transactionManager(DataSource dataSource){
+        DataSourceTransactionManager transactionManager=new DataSourceTransactionManager();
+        transactionManager.setDataSource(dataSource);      //Spring为我们提供了DataSource类,我们只需要set好对应的信息,容器启动后Spring会自动帮我们获取到该资源
+        return transactionManager;
     }
 }

@@ -5,7 +5,6 @@ import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.context.annotation.Bean;
 
 import javax.sql.DataSource;
-
 public class MybatisConfig {
     @Bean
     public SqlSessionFactoryBean sqlSessionFactory(DataSource dataSource) {//SqlSessionFactoryBeans是mybatis为整合Spring提供的一个类，可以快速获取工厂对象

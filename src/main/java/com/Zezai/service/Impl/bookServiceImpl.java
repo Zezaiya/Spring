@@ -3,30 +3,31 @@ package com.Zezai.service.Impl;
 import com.Zezai.dao.Dao;
 import com.Zezai.domain.Brand;
 import com.Zezai.service.Service;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Scope;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @org.springframework.stereotype.Service("ServiceImpl")//设置这个类为bean类，取名为bookServiceImpl
 @ComponentScan("com.Zezai")//光设置类不行，必须让容器能找到该bean，所以要添加扫描仪
 @Scope("prototype")
 public class bookServiceImpl implements Service {
-    @Autowired
+    @Resource
     private Dao dao; //通过new的方式耦合度仍然很高,所以我们需要通过方法来创建对象
     @Value("${number}")
     public int number;
     @Value("${name}")
     public String name;
-    public void serviceAction() {
-        dao.daoAction();
-    }
-
     @Override
     public boolean CodeCheckService(String username, String password) {
-        return dao.CodeCheck(username,password);
+        if(dao.CodeCheck(username, password)!=null)
+        {
+            return true;
+        }
+        else
+            return false;
     }
 
 
@@ -35,10 +36,25 @@ public class bookServiceImpl implements Service {
     /*public void setDao(Dao dao) {
         this.dao = dao;
     }*/
-
+    void bookServiceImpl(){};
     public List<Brand> selectAll(){
         List<Brand> brandInfo=dao.selectAll();
         return brandInfo;
+    }
+
+    @Override
+    public int ServiceCheckLeftMoney(String username) {
+        System.out.println(dao.CheckLeftMoney(username));
+       return dao.CheckLeftMoney(username);
+    }
+
+    @Override
+    public void ServiceTransfer(String username,String OPusername,int lost) {
+        dao.inMoney(OPusername,lost);
+        //如果在转账操作中间出现异常,会导致账户金额出现异常,所以这个时候需要用到事务处理
+       int i= 2/0;
+        dao.outMoney(username,lost);
+        System.out.println("转账成功!");
     }
     /*@PostConstruct
     public void afterPropertiesSet() {

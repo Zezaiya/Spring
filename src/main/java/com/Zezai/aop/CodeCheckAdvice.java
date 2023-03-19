@@ -1,7 +1,6 @@
 package com.Zezai.aop;
 
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
@@ -12,7 +11,7 @@ public class CodeCheckAdvice {
     @Pointcut("execution(* com.Zezai.service.Service.CodeCheckService(..))")
     private void pt1(){}
 
-    @Around("pt1()")
+    //@Around("pt1()")
     public Object  CodeCheck(ProceedingJoinPoint pjp) throws Throwable {
        Object[] args=pjp.getArgs();
         for (int i = 0; i < args.length; i++) {
